@@ -1,80 +1,124 @@
-# AutonomousShipment — Trial Roll-Out (Part 1)
+# AutonomousShipment Autonomous Delivery Trial
 
-Welcome to the *AutonomousShipment* project!  
-This repository contains everything needed to reproduce the analysis and recommendations for the first stage of our autonomous-delivery pilot in Leeds.
+## Overview  
+This repository contains all instructions and data needed to conduct a one-month trial roll-out of AutonomousShipment’s last-leg delivery robots around Leeds. Management will use this trial to:
 
----
-
-## 📜 Overview
-
-We have two key managerial decisions to make:
-
-1. **Prototype Selection** – choose **one** of four autonomous-robot prototypes for the trial.  
-2. **Resource Allocation** – decide how many of the chosen robots to assign to each partner store so that we maximise daily deliveries **within budget and staffing limits**.
-
-The outcome of this work will guide our one-month pilot across grocery, clothing and sports-equipment retailers in the Leeds area.
+1. **Select** the optimal prototype robot for the trial (Task 1).  
+2. **Allocate** a fleet of robots across different store types under budget, staffing, and coverage constraints (Task 2).
 
 ---
 
-## 1  Background
+## Table of Contents
 
-AutonomousShipment is a Leeds-based start-up backed by UK venture-capital funds and government support.  
-Our goal is to use small ground-based delivery robots to speed up last-leg logistics, cutting costs for retailers and delighting consumers with faster, greener deliveries.
-
-For this pilot we have built four hardware prototypes:
-
-| Prototype | Nickname |
-|-----------|----------|
-| `A032` | **Archer** |
-| `B23`  | **Bowler** |
-| `CJKL` | **Corner** |
-| `DSXX` | **Deviant** |
-
-Only one of these will be taken into the live trial.
-
----
-
-## 2  Decision #1 – Prototype Selection
-
-### 2.1  Decision criteria
-
-| Criterion | What it means | Preferred direction |
-|-----------|---------------|---------------------|
-| **Carrying capacity** (litres) | Cargo volume | *Higher* |
-| **Battery size** (hours) | Un-recharged run-time | *Higher* |
-| **Average speed** (km h⁻¹) | Typical cruising speed | *Higher* |
-| **Cost per unit** (£) | Capital expense | *Lower* |
-| **Reliability** (hours MTBF) | Mean time between failures | *Higher* |
-
-> ⚠️ *The autonomous-navigation software is **not** part of this evaluation – focus strictly on the hardware specs.*
-
-### 2.2  Data sources
-
-| File | Description |
-|------|-------------|
-| **`data/Robot_Info.csv`** | Raw specs for each prototype |
-| **`data/Management_Priority.xlsx`** | Relative weights/importance (agreed July 2023) |
+- [Background](#background)  
+- [Data Files](#data-files)  
+- [Task 1: Prototype Selection](#task-1-prototype-selection)  
+  - [Decision Criteria](#decision-criteria)  
+  - [What to Deliver](#what-to-deliver)  
+- [Task 2: Fleet Allocation](#task-2-fleet-allocation)  
+  - [Store Types & Delivery Rates](#store-types--delivery-rates)  
+  - [Costs & Staffing](#costs--staffing)  
+  - [Constraints & Objectives](#constraints--objectives)  
+  - [What to Deliver](#what-to-deliver-1)  
+- [Report Requirements](#report-requirements)  
+- [Submission](#submission)
 
 ---
 
-## 3  Decision #2 – Robot Allocation
-
-Once a prototype is chosen, we must allocate robots to three partner stores:
-
-| Store type | Code | Orders / robot / day | Operating cost / robot / month (£) | Technician hours / robot / week |
-|------------|------|----------------------|------------------------------------|---------------------------------|
-| Grocery | `G` | **9** | **1 600** | **10** |
-| Clothing | `C` | **6** | **1 000** | **7** |
-| Sports equipment | `S` | **4** | **600** | **5** |
-
-### 3.1  Trial constraints
-
-* Minimum **5 robots per store**  
-* **Budget** ≤ **£250 000** (purchase **+** one-month operating costs)  
-* **Technician capacity** ≤ **250 staff-hours / week**  
-* Objective: **maximise total daily orders delivered**
+## Background  
+AutonomousShipment is a Leeds-based start-up backed by VC investors and the UK government. We operate autonomous robot drones for last-mile deliveries, aiming for faster service and lower costs. To prepare for full scale-up, we will trial one prototype robot type—deployed across grocery, clothing and sport-equipment stores—in the Leeds area.
 
 ---
 
-## 4  Repository Layout
+## Data Files  
+Place the following in this repo’s root before you begin:
 
+- **`Robot_Info.csv`**  
+  Contains numeric data for each prototype’s:  
+  - Carrying capacity (litres)  
+  - Battery life (hours)  
+  - Average speed (km/h)  
+  - Unit cost (GBP)  
+  - Reliability (hours between breakdowns)
+
+- **`Management_Priority.xlsx`**  
+  Management’s weighting of each decision criterion (derived July 2023).
+
+---
+
+## Task 1: Prototype Selection  
+
+### Decision Criteria  
+Select one robot out of:  
+- **Robot A032 – Archer**  
+- **Robot B23 – Bowler**  
+- **Robot CJKL – Corner**  
+- **Robot DSXX – Deviant**  
+
+Evaluate each by:  
+1. **Carrying Capacity** (higher = better)  
+2. **Battery Size** (hours; higher = better)  
+3. **Average Speed** (km/h; higher = better)  
+4. **Cost per Unit** (GBP; lower = better)  
+5. **Reliability** (hours between breakdowns; higher = better)  
+
+Weight each criterion by the values in `Management_Priority.xlsx` to **maximize overall utility**.
+
+### What to Deliver  
+- A clear **recommendation**: which prototype to trial.  
+- A **utility-scoring table** showing each robot’s normalized score × weight.  
+- A brief **justification** (approx. 300 – 400 words) referencing both quantitative scores and any qualitative considerations.
+
+---
+
+## Task 2: Fleet Allocation  
+
+### Store Types & Delivery Rates  
+| Store Type             | Orders/robot/day |
+|------------------------|------------------|
+| Grocery Store          | 9                |
+| Clothing Store        | 6                |
+| Sport Equipment Store | 4                |
+
+### Costs & Staffing  
+- **Acquisition Cost**: unit cost of selected prototype (from Task 1).  
+- **Operating Cost (month)**:  
+  - Grocery: £1,600/robot  
+  - Clothing: £1,000/robot  
+  - Sport Equipment: £600/robot  
+- **Technician Support** (hours/robot/week):  
+  - Grocery: 10 h  
+  - Clothing: 7 h  
+  - Sport Equipment: 5 h  
+
+### Constraints & Objectives  
+1. **Minimum fleet**: at least **5 robots** per store type.  
+2. **Budget cap**: total acquisition + operating costs ≤ **£250,000**.  
+3. **Staffing cap**: total technician hours ≤ **250 h/week**.  
+4. **Goal**: maximize **total orders per day** across all stores.
+
+### What to Deliver  
+- An **allocation table**: number of robots per store.  
+- **Cost calculation** showing acquisition + operating vs. budget.  
+- **Staffing calculation** vs. available hours.  
+- **Total daily orders** achieved.  
+- A concise **recommendation** explaining your allocation logic (approx. 300 – 400 words).
+
+---
+
+## Report Requirements  
+- **Format**: single report (Word or PDF).  
+- **Length**: ≤ 1,500 words total for both tasks.  
+- **Include**:  
+  - Tables and figures as needed.  
+  - Clear headings corresponding to each deliverable.  
+  - Appendix with raw calculation tables (if desired).
+
+---
+
+## Submission  
+1. Push your completed report (`AutonomousShipment_Trial_Report.docx` or `.pdf`) to this repo.  
+2. Include any supporting spreadsheets or export tables as CSVs under a `/data` directory.  
+3. Create a Pull Request against the **`main`** branch by the deadline.
+
+Good luck! If you have any questions, please open an Issue in this repository.
